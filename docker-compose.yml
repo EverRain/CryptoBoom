@@ -1,0 +1,27 @@
+# docker-compose.yml
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: finance_user
+      POSTGRES_PASSWORD: finance_pass
+      POSTGRES_DB: finance_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"   # port AMQP
+      - "15672:15672" # port UI management
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: pass
+
+volumes:
+  pgdata:
