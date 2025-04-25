@@ -3,7 +3,7 @@ name = "ms-scraper"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "ADRIEN RATEAU",email = "adrien.rateau@epitech.eu"}
+    {name = "ADRIEN RATEAU", email = "adrien.rateau@epitech.eu"}
 ]
 readme = "README.md"
 requires-python = ">=3.10"
@@ -16,7 +16,12 @@ dependencies = [
     "alembic (>=1.15.2,<2.0.0)"
 ]
 
-
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [
+    { include = "scrapper" },
+    { include = "models" }
+]

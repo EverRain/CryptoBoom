@@ -24,7 +24,7 @@ import sys
 # Ajoute le dossier racine (ms_scraper) au sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from models.articles import Base
+from models import Base
 
 target_metadata = Base.metadata
 

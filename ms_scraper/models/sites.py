@@ -1,8 +1,6 @@
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, Text, DateTime
-import datetime
-
-Base = declarative_base()
+# models/sites.py
+from sqlalchemy import Column, Integer, String
+from models import Base
 
 class Site(Base):
     __tablename__ = "sites"
