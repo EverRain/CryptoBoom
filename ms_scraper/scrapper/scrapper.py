@@ -11,7 +11,6 @@ def run_scraper():
 
         db = SessionLocal()
         sites = db.query(Site).all()
-        db.close()
 
         for site in sites:
             method_name = site.methode
@@ -20,10 +19,22 @@ def run_scraper():
             if hasattr(scraping_methods, method_name):
                 method = getattr(scraping_methods, method_name)
                 print(f"Scraping site: {site.site} with method: {method_name}")
-                method(site.url)
+
+                # 🔥 Récupère les articles
+                articles = method(site.url)
+
+                if articles:
+                    print(f"✅ {len(articles)} articles récupérés pour {site.site}")
+                    for article_url in articles:
+                        print(f" - {article_url}")
+                        # 👉 Ici on pourra ensuite faire insert/check doublons en BDD
+                else:
+                    print(f"⚠️ Aucun article trouvé pour {site.site}")
+
             else:
                 print(f"⚠️ No scraping method found for: {method_name}")
 
+        db.close()
         print(f"🕒 Sleeping for {DELAY_MINUTES} minutes...")
         time.sleep(DELAY_MINUTES * 60)
 
