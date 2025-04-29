@@ -78,19 +78,19 @@ def scraper_lejournalducoin(url):
 
         nouvelles_urls.append(link)
         # Analyse
-        # market = detecter_marche(data['content'])
-        # if market:
-        #     tendance = analyser_tendance(data['content'])
-        #     analyse = ArticleAnalyse(
-        #         article_id=nouvel_article.id,
-        #         market_place=market,
-        #         tendance=tendance
-        #     )
-        #     session.add(analyse)
-        #     session.commit()
-        #     print(f"🔎 Analyse : marché={market}, tendance={tendance}")
-        # else:
-        #     print("⚠️ Aucun marché détecté, analyse non enregistrée.")
+        market = detecter_marche(data['content'])
+        if market:
+            tendance = analyser_tendance(data['content'])
+            analyse = ArticleAnalyse(
+                article_id=nouvel_article.id,
+                market_place=market,
+                tendance=tendance
+            )
+            session.add(analyse)
+            session.commit()
+            print(f"🔎 Analyse : marché={market}, tendance={tendance}")
+        else:
+            print("⚠️ Aucun marché détecté, analyse non enregistrée.")
         print(f"✅ Article ajouté : {data['title']}")
 
     session.close()
