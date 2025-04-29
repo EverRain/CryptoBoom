@@ -53,6 +53,50 @@ def scraper_lejournalducoin(url):
     session: Session = SessionLocal()
     nouvelles_urls = []
 
+    for link in links:
+        # Doublon ?
+        exists = session.query(Article).filter(Article.url == link).first()
+        if exists:
+            continue
+
+        # Scraping contenu
+        data = scraper_contenu_article(link)
+        if not data:
+            continue
+
+        # Création et insertion
+        nouvel_article = Article(
+            title=data['title'],
+            url=link,
+            content=data['content'],
+            source="JournalDuCoin",
+            scraped_at=datetime.datetime.utcnow()
+        )
+
+        session.add(nouvel_article)
+        session.commit()
+
+        nouvelles_urls.append(link)
+        # # Analyse
+        # market = detecter_marche(data['content'])
+        # if market:
+        #     tendance = analyser_tendance(data['content'])
+        #     analyse = ArticleAnalyse(
+        #         article_id=nouvel_article.id,
+        #         market_place=market,
+        #         tendance=tendance
+        #     )
+        #     session.add(analyse)
+        #     session.commit()
+        #     print(f"🔎 Analyse : marché={market}, tendance={tendance}")
+        # else:
+        #     print("⚠️ Aucun marché détecté, analyse non enregistrée.")
+        # print(f"✅ Article ajouté : {data['title']}")
+
+    session.close()
+    return nouvelles_urls
+
+
 def scraper_cointelegraph(url):
     try:
         response = requests.get(url)
