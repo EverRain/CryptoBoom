@@ -5,3 +5,4 @@ Base = declarative_base()
 
 from .articles import Article
 from .sites import Site
+from .analyse_article import ArticleAnalyse
