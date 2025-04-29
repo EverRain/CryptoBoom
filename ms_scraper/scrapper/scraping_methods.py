@@ -217,3 +217,213 @@ def scraper_blockworks(url):
 
     session.close()
     return nouvelles_urls
+def scraper_bloomberg(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Erreur : {e}")
+        return []
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = []
+
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        if href.startswith('/news/articles/'):
+            full_url = 'https://www.bloomberg.com' + href
+            links.append(full_url)
+
+    return list(set(links))
+
+def scraper_reuters(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Erreur : {e}")
+        return []
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = []
+
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        if href.startswith('/article/') or href.startswith('/business/'):
+            full_url = 'https://www.reuters.com' + href
+            links.append(full_url)
+
+    return list(set(links))
+
+def scraper_cnbc(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Erreur : {e}")
+        return []
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = []
+
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        if href.startswith('/202') and 'cnbc.com' not in href:
+            full_url = 'https://www.cnbc.com' + href
+            links.append(full_url)
+
+    return list(set(links))
+
+def scraper_financial_times(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Erreur : {e}")
+        return []
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = []
+
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        if href.startswith('/content/'):
+            full_url = 'https://www.ft.com' + href
+            links.append(full_url)
+
+    return list(set(links))
+
+def scraper_wsj(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Erreur : {e}")
+        return []
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = []
+
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        if href.startswith('/articles/'):
+            full_url = 'https://www.wsj.com' + href
+            links.append(full_url)
+
+    return list(set(links))
+
+def scraper_investopedia(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Erreur : {e}")
+        return []
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = []
+
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        if href.startswith('/terms/') or href.startswith('/articles/'):
+            full_url = 'https://www.investopedia.com' + href
+            links.append(full_url)
+
+    return list(set(links))
+
+def scraper_marketwatch(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Erreur : {e}")
+        return []
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = []
+
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        if href.startswith('/story/'):
+            full_url = 'https://www.marketwatch.com' + href
+            links.append(full_url)
+
+    return list(set(links))
+
+def scraper_seekingalpha(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Erreur : {e}")
+        return []
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = []
+
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        if href.startswith('/article/'):
+            full_url = 'https://seekingalpha.com' + href
+            links.append(full_url)
+
+    return list(set(links))
+
+def scraper_yahoo_finance(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Erreur : {e}")
+        return []
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = []
+
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        if '/news/' in href:
+            if href.startswith('http'):
+                links.append(href)
+            else:
+                full_url = 'https://finance.yahoo.com' + href
+                links.append(full_url)
+
+    return list(set(links))
+
+def scraper_the_economist(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Erreur : {e}")
+        return []
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = []
+
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        if href.startswith('/'):
+            full_url = 'https://www.economist.com' + href
+            links.append(full_url)
+
+    return list(set(links))
+
+def scraper_forbes(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Erreur : {e}")
+        return []
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = []
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        if href.startswith('/sites/') or href.startswith('/profile/'):
+            full_url = 'https://www.forbes.com' + href
+            links.append(full_url)
+
+    return list(set(links))
