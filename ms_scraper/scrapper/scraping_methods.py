@@ -427,3 +427,136 @@ def scraper_forbes(url):
             links.append(full_url)
 
     return list(set(links))
+
+def scraper_bfm_crypto(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Erreur : {e}")
+        return []
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = []
+
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        if href.startswith('/crypto/') and 'video' not in href:
+            full_url = 'https://www.bfmtv.com' + href
+            links.append(full_url)
+
+    return list(set(links))
+
+def scraper_boursorama_finances(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Erreur : {e}")
+        return []
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = []
+
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        if href.startswith('/bourse/actualites/') and 'finances' in href:
+            full_url = 'https://www.boursorama.com' + href
+            links.append(full_url)
+
+    return list(set(links))
+
+def scraper_lesechos_finance(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Erreur : {e}")
+        return []
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = []
+
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        if href.startswith('/finance-marches/') or href.startswith('/marches/'):
+            full_url = 'https://www.lesechos.fr' + href
+            links.append(full_url)
+
+    return list(set(links))
+
+def scraper_tradingview_news(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Erreur : {e}")
+        return []
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = []
+
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        if href.startswith('/news/') and 'markets' in href:
+            full_url = 'https://fr.tradingview.com' + href
+            links.append(full_url)
+
+    return list(set(links))
+
+def scraper_investing_news(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Erreur : {e}")
+        return []
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = []
+
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        if href.startswith('/news/') and 'headlines' not in href:
+            full_url = 'https://fr.investing.com' + href
+            links.append(full_url)
+
+    return list(set(links))
+
+def scraper_agefi_grand_angle(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Erreur : {e}")
+        return []
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = []
+
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        if href.startswith('/news/') or href.startswith('/investisseurs-institutionnels/actualites/'):
+            full_url = 'https://www.agefi.fr' + href
+            links.append(full_url)
+
+    return list(set(links))
+
+def scraper_finary_actualites(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Erreur : {e}")
+        return []
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = []
+
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        if href.startswith('/fr/actualites-produit/'):
+            full_url = 'https://finary.com' + href
+            links.append(full_url)
+
+    return list(set(links))
