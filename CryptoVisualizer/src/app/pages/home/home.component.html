@@ -1,0 +1,10 @@
+<div class="dashboard">
+    <!-- home.component.html -->
+  <div class="cards-container">
+    <app-graphcard
+      *ngFor="let item of graphData; let i = index"
+      [data]="[item]"
+      class="card-item">
+    </app-graphcard>
+  </div>
+</div>

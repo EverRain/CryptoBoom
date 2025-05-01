@@ -1,0 +1,31 @@
+.dashboard {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; // ou center si tu veux verticalement centré
+    padding: 2rem;
+    background-color: #1e213a;
+    min-height: 100vh;
+  }
+  
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;               // autorise le retour à la ligne
+    justify-content: center;       // centre les cartes horizontalement
+    gap: 1.5rem;                   // espace horizontal et vertical
+    padding: 2rem;
+    background-color: #1e213a;
+  }
+  
+  /* chaque carte peut prendre jusqu’à 350px, mais se réduit si l’écran est trop petit */
+  .card-item {
+    flex: 1 1 350px;               // grow=1, shrink=1, base=350px
+    max-width: 350px;              // ne pas dépasser 350px
+  }
+  
+  /* point de rupture pour écrans étroits */
+  @media (max-width: 768px) {
+    .card-item {
+      flex: 1 1 100%;              // 100% de la largeur dispo
+      max-width: none;             // annule la max-width
+    }
+  }

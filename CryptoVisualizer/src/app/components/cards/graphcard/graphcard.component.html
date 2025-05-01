@@ -1,0 +1,18 @@
+<div class="card">
+  <apx-chart
+    #chart
+    [series]="chartOptions.series"
+    [chart]="chartOptions.chart"
+    [plotOptions]="chartOptions.plotOptions"
+    [fill]="chartOptions.fill"
+    [stroke]="chartOptions.stroke"
+    [labels]="chartOptions.labels"
+    [legend]="chartOptions.legend"
+    [responsive]="chartOptions.responsive">
+  </apx-chart>
+
+  <div class="legend">
+    <span class="dot"></span>
+    <span class="text">{{ data[0].name }}</span>
+  </div>
+</div>
